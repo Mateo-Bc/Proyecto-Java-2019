@@ -1,5 +1,8 @@
 package proyectoasistentepersonal;
 
+import java.util.*;
+import java.text.SimpleDateFormat;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.Color;
@@ -8,6 +11,8 @@ import java.awt.event.ActionListener;
 
 import java.awt.Image;
 import javax.swing.ImageIcon;
+
+import java.util.Date;
 
 public class Interfaz extends JFrame {
     
@@ -84,10 +89,31 @@ public class Interfaz extends JFrame {
                 String container = texto.getText();
                 String nada = "";
                 texto.setText(nada);
-                consola.append(container);
-                consola.append(System.getProperty("line.separator"));
+                
+                int longitud = container.length();
+                
                 //new ProyectoAsistentePersonal("");
                 
+                String[] vector = container.split(" +");
+                
+                for (int x=0;x<vector.length;x++)
+                    System.out.println("[" + x + "] " + vector[x]);
+                    if (Arrays.asList(vector).contains("fecha") || Arrays.asList(vector).contains("fecha?")){
+                        Date fecha = new Date();
+                        consola.append("[Directiva]: " + container);
+                        consola.append(System.getProperty("line.separator"));
+                        consola.append("- Hoy es " + fecha.toString());
+                        consola.append(System.getProperty("line.separator"));
+                        consola.append(System.getProperty("line.separator"));
+                        consola.append(System.getProperty("line.separator"));
+                        consola.append(System.getProperty("line.separator"));
+                        
+                    }else{
+                        System.out.println("tu vieja");
+                    }
+                    
+                //consola.append(container);
+                //consola.append(System.getProperty("line.separator"));
                 
             }
         });
