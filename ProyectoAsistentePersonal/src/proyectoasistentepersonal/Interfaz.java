@@ -107,6 +107,7 @@ public class Interfaz extends JFrame {
                         consola.append(System.getProperty("line.separator"));
                         consola.append(System.getProperty("line.separator"));
                         consola.append(System.getProperty("line.separator"));
+                        new ProyectoAsistentePersonal("- Hoy es " + fecha.toString());
                         
                     }else{
                         System.out.println("tu vieja");
