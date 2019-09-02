@@ -19,7 +19,7 @@ public class ProyectoAsistentePersonal {
     
     public static void main(String[] args) {
         
-        new ProyectoAsistentePersonal("Bienvenido");
+        ProyectoAsistentePersonal pierre = new ProyectoAsistentePersonal("Bienvenido");
         
         Interfaz I = new Interfaz();
         
