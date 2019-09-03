@@ -23,10 +23,6 @@ public class ProyectoAsistentePersonal {
         
         Interfaz I = new Interfaz();
         
-        //new ProyectoAsistentePersonal("");
-        
-        
-        
     }
     
 }

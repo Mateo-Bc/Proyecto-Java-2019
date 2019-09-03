@@ -106,6 +106,9 @@ public class Interfaz extends JFrame {
         JButton signoresultado = new JButton("=");
         signoresultado.setBounds(505, 305, 15, 15);
         signoresultado.setVisible(false);
+        
+        JFileChooser selectorArchivos = new JFileChooser();
+        
         //-------------------------//
         
         //--Inicio de la ventana--//
@@ -126,12 +129,13 @@ public class Interfaz extends JFrame {
         this.add(resultadito);
         this.add(signoresultado);
         
+        this.add(selectorArchivos);
         //------------------------//
         
         enviar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent enviar) {
-                Metodos m = new Metodos(texto.getText(),consola, labelimagen, suma, resta, multiplicacion, division, numero1, numero2, signo, resultadito, signoresultado);
+                Metodos m = new Metodos(texto.getText(),consola, labelimagen, suma, resta, multiplicacion, division, numero1, numero2, signo, resultadito, signoresultado, selectorArchivos);
                 m.analisis();
                 
             suma.addActionListener(new ActionListener() {
@@ -179,7 +183,7 @@ public class Interfaz extends JFrame {
             division.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent division) {
-                    m.multiplicar();
+                    m.dividir();
                     signoresultado.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent signoresultado) {

@@ -4,12 +4,14 @@ import java.io.File;
 import java.util.Date;
 import java.util.Arrays;
 import javax.swing.*;
+import java.nio.file.*;
 
 class Metodos {
     File archivo = new File("/home/mateo/Escritorio/archivo.txt");
     private String texto;
     private JTextArea consola;
     private JLabel labelimagen;
+    
     private JButton suma;
     private JButton resta;
     private JButton multiplicacion;
@@ -20,10 +22,13 @@ class Metodos {
     private JTextField resultadito;
     private JButton signoresultado;
     
-    public Metodos(String texto, JTextArea consola, JLabel labelimagen, JButton suma, JButton resta, JButton multiplicacion, JButton division, JTextField numero1, JTextField numero2, JLabel signo, JTextField resultadito, JButton signoresultado){
+    private JFileChooser selectorArchivos;
+    
+    public Metodos(String texto, JTextArea consola, JLabel labelimagen, JButton suma, JButton resta, JButton multiplicacion, JButton division, JTextField numero1, JTextField numero2, JLabel signo, JTextField resultadito, JButton signoresultado, JFileChooser selectorArchivos){
         this.texto = texto;
         this.consola = consola;
         this.labelimagen = labelimagen;
+        
         this.suma = suma;
         this.resta = resta;
         this.multiplicacion = multiplicacion;
@@ -33,6 +38,8 @@ class Metodos {
         this.signo = signo;
         this.resultadito = resultadito;
         this.signoresultado = signoresultado;
+        
+        this.selectorArchivos = selectorArchivos;
     }
     
     public void analisis(){
@@ -43,6 +50,17 @@ class Metodos {
                 int longitud = container.length();
                 
                 String[] vector = container.split(" +");
+                
+                suma.setVisible(false);
+                resta.setVisible(false);
+                multiplicacion.setVisible(false);
+                division.setVisible(false);
+                
+                numero1.setVisible(false);
+                numero2.setVisible(false);
+                signo.setVisible(false);
+                resultadito.setVisible(false);
+                signoresultado.setVisible(false);
                 
                 for (int x=0;x<vector.length;x++)
                     System.out.println("[" + x + "] " + vector[x]);
@@ -85,10 +103,29 @@ class Metodos {
                         multiplicacion.setVisible(true);
                         division.setVisible(true);
                         
+                    }else if (Arrays.asList(vector).contains("explorar") && Arrays.asList(vector).contains("archivos") || Arrays.asList(vector).contains("archivos?")){
+                        selectorArchivos.setFileSelectionMode(JFileChooser.FILES_ONLY);
+                        int resultado = selectorArchivos.showOpenDialog(selectorArchivos);
+                        File archivo = selectorArchivos.getSelectedFile();
                         
-                    }
+                        consola.append("[Directiva]: " + container);
+                        String nombrearchivo = archivo.getName();
+                        consola.setText("- El archivo seleccionado se llama: " + nombrearchivo);
+                        consola.append(System.getProperty("line.separator"));
+                        String direccionarchivo = archivo.getAbsolutePath();
+                        consola.append("- Su ruta es: " + direccionarchivo);
+                        
+                        File nombrenuevo = new File("caca");
+                        archivo.renameTo(nombrenuevo);
+                        
+                        
+                    }else
+                        consola.append("- Que se yo amigo");
+                        consola.append(System.getProperty("line.separator"));
                         
                 }
+    
+    
     
     public void sumar(){
         suma.setVisible(false);
@@ -108,10 +145,10 @@ class Metodos {
     public void resultasuma(){
         String valor1 = numero1.getText();
         String valor2 = numero2.getText();
-        int numEntero1 = Integer.parseInt(valor1);
-        int numEntero2 = Integer.parseInt(valor2);
-        int operacion = numEntero1 + numEntero2;
-        resultadito.setText(Integer.toString(operacion));
+        double numEntero1 = Integer.parseInt(valor1);
+        double numEntero2 = Integer.parseInt(valor2);
+        double operacion = numEntero1 + numEntero2;
+        resultadito.setText(Double.toString(operacion));
     }
     
     public void restar(){
@@ -132,10 +169,10 @@ class Metodos {
     public void resultaresta(){
         String valor1 = numero1.getText();
         String valor2 = numero2.getText();
-        int numEntero1 = Integer.parseInt(valor1);
-        int numEntero2 = Integer.parseInt(valor2);
-        int operacion = numEntero1 - numEntero2;
-        resultadito.setText(Integer.toString(operacion));
+        double numEntero1 = Integer.parseInt(valor1);
+        double numEntero2 = Integer.parseInt(valor2);
+        double operacion = numEntero1 - numEntero2;
+        resultadito.setText(Double.toString(operacion));
     }
     
     public void multiplicar(){
@@ -156,10 +193,10 @@ class Metodos {
     public void resultamulti(){
         String valor1 = numero1.getText();
         String valor2 = numero2.getText();
-        int numEntero1 = Integer.parseInt(valor1);
-        int numEntero2 = Integer.parseInt(valor2);
-        int operacion = numEntero1 * numEntero2;
-        resultadito.setText(Integer.toString(operacion));
+        double numEntero1 = Integer.parseInt(valor1);
+        double numEntero2 = Integer.parseInt(valor2);
+        double operacion = numEntero1 * numEntero2;
+        resultadito.setText(Double.toString(operacion));
     }
     
     public void dividir(){
@@ -180,25 +217,10 @@ class Metodos {
     public void resultadivi(){
         String valor1 = numero1.getText();
         String valor2 = numero2.getText();
-        int numEntero1 = Integer.parseInt(valor1);
-        int numEntero2 = Integer.parseInt(valor2);
-        int operacion = numEntero1 / numEntero2;
-        resultadito.setText(Integer.toString(operacion));
-    }
-    
-    
-    
-    public void existe(){
-        if (archivo.exists()){
-            System.out.println("dou");
-        }else{
-            System.out.println("sad dou");
-        }
-            
-    }
-
-    private void pierre(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        double numEntero1 = Integer.parseInt(valor1);
+        double numEntero2 = Integer.parseInt(valor2);
+        double operacion = numEntero1 / numEntero2;
+        resultadito.setText(Double.toString(operacion));
     }
         
 }
