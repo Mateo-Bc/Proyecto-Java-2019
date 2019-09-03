@@ -1,5 +1,8 @@
 package proyectoasistentepersonal;
 
+import java.util.*;
+import java.text.SimpleDateFormat;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.Color;
@@ -8,6 +11,8 @@ import java.awt.event.ActionListener;
 
 import java.awt.Image;
 import javax.swing.ImageIcon;
+
+import java.util.Date;
 
 public class Interfaz extends JFrame {
     
@@ -65,6 +70,44 @@ public class Interfaz extends JFrame {
         scroll.setBounds(100, 350, 600, 100);
         scroll.setVisible(true);
         
+        JButton suma = new JButton("Suma");
+        suma.setBounds(225, 300, 75, 30);
+        suma.setVisible(false);
+        
+        JButton resta = new JButton("Resta");
+        resta.setBounds(325, 300, 75, 30);
+        resta.setVisible(false);
+        
+        JButton multiplicacion = new JButton("Mult.");
+        multiplicacion.setBounds(425, 300, 75, 30);
+        multiplicacion.setVisible(false);
+        
+        JButton division = new JButton("Div.");
+        division.setBounds(525, 300, 75, 30);
+        division.setVisible(false);
+        
+        JTextField numero1 = new JTextField();
+        numero1.setBounds(325, 300, 75, 30);
+        numero1.setVisible(false);
+        
+        JTextField numero2 = new JTextField();
+        numero2.setBounds(425, 300, 75, 30);
+        numero2.setVisible(false);
+        
+        JLabel signo = new JLabel("?");
+        signo.setBounds(410, 310, 10, 10);
+        signo.setVisible(false);
+        
+        JTextField resultadito = new JTextField();
+        resultadito.setBounds(525, 300, 75, 30);
+        resultadito.setVisible(false);
+        resultadito.setEditable(false);
+        
+        JButton signoresultado = new JButton("=");
+        signoresultado.setBounds(505, 305, 15, 15);
+        signoresultado.setVisible(false);
+        
+        JFileChooser selectorArchivos = new JFileChooser();
         
         //-------------------------//
         
@@ -76,20 +119,84 @@ public class Interfaz extends JFrame {
         //this.add(consola);
         this.add(scroll);
         
+        this.add(suma);
+        this.add(resta);
+        this.add(multiplicacion);
+        this.add(division);
+        this.add(numero1);
+        this.add(numero2);
+        this.add(signo);
+        this.add(resultadito);
+        this.add(signoresultado);
+        
+        this.add(selectorArchivos);
         //------------------------//
         
         enviar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent enviar) {
-                String container = texto.getText();
-                String nada = "";
-                texto.setText(nada);
-                consola.append(container);
-                consola.append(System.getProperty("line.separator"));
-                //new ProyectoAsistentePersonal("");
+                Metodos m = new Metodos(texto.getText(),consola, labelimagen, suma, resta, multiplicacion, division, numero1, numero2, signo, resultadito, signoresultado, selectorArchivos);
+                m.analisis();
                 
+            suma.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent suma) {
+                    m.sumar();
+                    signoresultado.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent signoresultado) {
+                        m.resultasuma();
                 
+                }
+            });
+                
+                }
+            });
+            
+            resta.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent resta) {
+                    m.restar();
+                    signoresultado.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent signoresultado) {
+                        m.resultaresta();
+                }
+            });
+                    
             }
         });
+            
+            multiplicacion.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent multiplicacion) {
+                    m.multiplicar();
+                    signoresultado.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent signoresultado) {
+                        m.resultamulti();
+                }
+            });
+                    
+            }
+        });
+            division.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent division) {
+                    m.dividir();
+                    signoresultado.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent signoresultado) {
+                        m.resultadivi();
+                }
+            });
+                    
+            }
+        });
+            
+        }
+    });
     }
 }
+
+            
